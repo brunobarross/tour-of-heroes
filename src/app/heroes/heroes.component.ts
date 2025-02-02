@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 import { HeroService } from '../services/hero.service';
 import { MessageService } from '../services/message.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
   standalone: true,
-  imports: [FormsModule, NgFor, HeroDetailComponent, HeroDetailComponent],
+  imports: [FormsModule, NgFor, RouterLink],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.scss',
 })
@@ -19,11 +20,7 @@ export class HeroesComponent {
     private messageService: MessageService
   ) {}
   heroes: Hero[] = [];
-  selectedHero?: Hero;
-  onSelectedHero(hero: Hero) {
-    this.selectedHero = hero;
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-  }
+
   getHeroes() {
     this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
